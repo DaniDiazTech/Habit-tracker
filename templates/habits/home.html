@@ -1,0 +1,8 @@
+<h1>Hello there</h1>
+<p>
+    {{user.username}}
+</p>
+{% for habit in habits %}
+    <a href="{% url 'calendar' habit.pk %}">{{habit}}</a>
+    <p>{{habit.description}}</p>
+{% endfor %}

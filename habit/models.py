@@ -1,21 +1,32 @@
-from email.policy import default
-from pyexpat import model
-from statistics import mode
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-class User(AbstractUser):
-    pass
-
-class Profile:
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    first_name = models.CharField()
-    last_name = models.CharField()
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 # Create your models here.
 class Habit(models.Model):
-    title = models.CharField(default="My habit")
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    positive = models.BooleanField(default=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-class HabitLog(models.Model):
-    
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ['-created']
+    def __str__(self):
+        return self.user.username + " - " + self.name
+
+
+class Daily(models.Model):
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
+    date = models.DateField(auto_now_add=True)
+    is_active = models.BooleanField(default=True) 
+
+    class Meta:
+        verbose_name_plural = "Daily habit"
+
+    def __str__(self):
+        return str(self.habit) + " - " + str(self.date)
+
