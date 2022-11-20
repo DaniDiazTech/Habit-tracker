@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block navbar %}{% endblock navbar %}
+
+{% block title %}Registrate{% endblock title %}
+
+{% block body %}
+<div class="text-center center">
+    <h1>Crea una cuenta</h1>
+    {% if form.errors %}
+    <p>Por favor, intenta de nuevo</p>
+    {% endif %}
+    <form action="#" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <div class="my-3">
+            <button class="btn btn-danger" type="submit">Registrarse</button>
+        </div>
+    </form>
+    <div class="text-center center my-3">
+        <p>Ya estas registrado? Solo <a href="{% url 'accounts:login' %}" class="link link-danger" >Ingresa</a></p>
+    </div>
+</div>
+{% endblock body %}
