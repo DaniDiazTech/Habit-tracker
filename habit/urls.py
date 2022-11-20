@@ -1,5 +1,8 @@
 from django.urls import path
 from .views import *
+
+
+app_name = 'habits'
 urlpatterns = [
     # User, all the habits in the current day
     path('', HomeView.as_view(), name="home"),
