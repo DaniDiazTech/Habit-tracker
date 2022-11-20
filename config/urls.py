@@ -20,4 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('habit.urls')),
     path('accounts/', include('accounts.urls')),
+    # Django reload
+    path("__reload__/", include("django_browser_reload.urls")),
 ]

@@ -1,30 +1,36 @@
-from re import I
+from datetime import datetime
+from pytz import timezone
+
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, View, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.shortcuts import get_object_or_404, get_list_or_404
 
 from django.conf.global_settings import LANGUAGE_CODE, TIME_ZONE
 from .models import Habit, Daily
 
-
-
+utc = datetime.now()
+tz = timezone(TIME_ZONE)
+today = utc.astimezone(tz)
 
 # Current day
 # All the habits of the user in the current day
-class HomeView(LoginRequiredMixin, ListView):
+class HomeView(LoginRequiredMixin, View):
     model = Habit
     template_name = "habits/home.html"
-    context_object_name = "habits"
 
 
-    def get_queryset(self, *args, **kwargs):
+    def get(self, *args, **kwargs):
+        context = {}
         queryset = self.model.objects.filter(user=self.request.user)
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        context['habits'] = []
+        context['today'] = today
+        for habit in queryset:
+            q = (Daily.objects.filter(habit=habit, date=today, is_active=True))
+            context['habits'].append([habit, q])
+        return render(self.request, self.template_name, context)
 
     # Create a daily with the selected habit
     # by checking the box
@@ -50,7 +56,15 @@ class HabitCreateView(LoginRequiredMixin, CreateView):
     model = Habit
     fields = ['name', 'description']
 
+    success_url = reverse_lazy('habits:home')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 class HabitUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'habits/habit_form.html'
     model = Habit
     fields = ['name', 'description']
+    
+    success_url = reverse_lazy('habits:home')

@@ -13,14 +13,21 @@
 </div>
 <div class="">
     <h4>
-        Hola {{user.username}}, estos son tus habitos
+        Hola {{user.username}}, estos son tus habitos {{daily}}
     </h4>
 </div>
 <div class="center">
     <ul class="list-group">
-        {% for habit in habits %}
+        {% for habit, daily in habits %}
             <li class="list-group-item">
+                <p>
                 <a href="{% url 'habits:calendar' habit.pk %}">{{habit.name}}</a>
+                <a href="{% url 'habits:update' habit.pk %}" class="link-success">Editar</a>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="checkbox" class="form-check"  value={{habit.pk}} named="checkboxes" {% if daily%}checked{% endif %}>
+                </form>
+                </p>
             </li>
         {% empty %}
             <li class="list-group-item">

@@ -14,5 +14,5 @@ urlpatterns = [
     path('create/', HabitCreateView.as_view(), name="create"),
 
     # Update habit
-    path('<int:pk>/habit', HabitUpdateView.as_view(), name="update"),
+    path('<int:pk>/update/', HabitUpdateView.as_view(), name="update"),
 ]
