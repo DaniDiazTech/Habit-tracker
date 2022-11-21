@@ -15,4 +15,7 @@ urlpatterns = [
 
     # Update habit
     path('<int:pk>/update/', HabitUpdateView.as_view(), name="update"),
+
+    # Delete habit
+    path('<int:pk>/delete/', HabitDeleteView.as_view(), name="delete"),
 ]

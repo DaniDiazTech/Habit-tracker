@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar {{habit.name}}{% endblock title %}
+
+{% block body %}
+<div class="text-center">
+    <h1>Eliminar {{habit.name}}</h1>
+    <p>Estas seguro de eliminar <b>{{habit.name}}</b>. Esta acción no se puede reversar.</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+</div>
+{% endblock body %}

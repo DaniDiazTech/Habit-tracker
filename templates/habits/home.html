@@ -23,6 +23,7 @@
                 <p>
                 <a href="{% url 'habits:calendar' habit.pk %}">{{habit.name}}</a>
                 <a href="{% url 'habits:update' habit.pk %}" class="link-success">Editar</a>
+                <a href="{% url 'habits:delete' habit.pk %}" class="link-danger">Eliminar</a>
                 <form action="" method="POST">
                     {% csrf_token %}
                     <input type="checkbox" class="form-check"  value={{habit.pk}} named="checkboxes" {% if daily%}checked{% endif %}>
