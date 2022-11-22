@@ -4,6 +4,16 @@
 
 
 {% block body %}
+{% block scripts %}
+<script>  
+    function ValorCheckbox(){
+      var valorCheckbox = document.getElementById("checkBox");
+      //alert(valorCheckbox.checked);
+      //document.getElementById("formCheckbox").submit()
+    }
+</script>
+
+{% endblock scripts %}
 {% comment %} Definitions {% endcomment %}
 {% now "d" as day %}
 {% now "l" as day_name %}
@@ -24,16 +34,20 @@
                 <a href="{% url 'habits:calendar' habit.pk %}">{{habit.name}}</a>
                 <a href="{% url 'habits:update' habit.pk %}" class="link-success">Editar</a>
                 <a href="{% url 'habits:delete' habit.pk %}" class="link-danger">Eliminar</a>
-                <form action="" method="POST">
+
+
+                <form name="formCheckbox" action="" method="POST" id="formCheckbox">
                     {% csrf_token %}
-                    <input type="checkbox" class="form-check"  value={{habit.pk}} named="checkboxes" {% if daily%}checked{% endif %}>
+                    <input type="checkbox" class="form-check"  value={{habit.pk}} name="daily" id="checkBox" on{% if daily%}checked{% endif %} onchange="document.getElementById('formCheckbox').submit()">
                 </form>
+
+
                 </p>
             </li>
         {% empty %}
             <li class="list-group-item">
                 <p>Lo sentimos, no tienes habitos. <a href="{% url 'habits:create' %}" class="link">Crea uno!</a></p>
-            </li>
+            </li>   
         {% endfor %}
         
     </ul>
@@ -41,3 +55,4 @@
 
 
 {% endblock body %}
+
