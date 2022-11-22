@@ -4,16 +4,6 @@
 
 
 {% block body %}
-{% block scripts %}
-<script>  
-    function ValorCheckbox(){
-      var valorCheckbox = document.getElementById("checkBox");
-      //alert(valorCheckbox.checked);
-      //document.getElementById("formCheckbox").submit()
-    }
-</script>
-
-{% endblock scripts %}
 {% comment %} Definitions {% endcomment %}
 {% now "d" as day %}
 {% now "l" as day_name %}
@@ -36,9 +26,10 @@
                 <a href="{% url 'habits:delete' habit.pk %}" class="link-danger">Eliminar</a>
 
 
-                <form name="formCheckbox" action="" method="POST" id="formCheckbox">
+                <form name="formCheckbox" action="" method="POST" id="formCheckbox{{forloop.counter}}">
                     {% csrf_token %}
-                    <input type="checkbox" class="form-check"  value={{habit.pk}} name="daily" id="checkBox" on{% if daily%}checked{% endif %} onchange="document.getElementById('formCheckbox').submit()">
+                    <input type="hidden" name="daily" value="{{habit.pk}}"/>
+                    <input type="checkbox" class="form-check"  id="checkBox" {% if daily%}checked{% endif %} onchange="document.getElementById('formCheckbox{{forloop.counter}}').submit()">
                 </form>
 
 

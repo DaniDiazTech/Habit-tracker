@@ -1,7 +1,7 @@
 from datetime import datetime
 from pytz import timezone
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, View, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -35,10 +35,16 @@ class HomeView(LoginRequiredMixin, View):
     # Create a daily with the selected habit
     # by checking the box
     def post(self,  *args, **kwargs):
-        habit= self.request.POST.getlist("daily")
-        Daily.objects
-        
+        habit_id = self.request.POST["daily"]
+        habit = Habit.objects.get(id=habit_id)
+        q = Daily.objects.filter(habit=habit, date=today)
+        if not q:
+            Daily.objects.create(habit=habit, date=today)
+        else:
+            q[0].is_active = not (q[0].is_active)
+            q[0].save() 
 
+        return redirect('habits:home')
 
 #  Calendar View for specific habit
 class CalendarView(LoginRequiredMixin, DetailView):
@@ -49,7 +55,7 @@ class CalendarView(LoginRequiredMixin, DetailView):
     # Get all the days the habit was done
     def get_context_data(self, *args, **kwargs):
         context =  super().get_context_data(*args, **kwargs)
-        context['days'] = Daily.objects.filter(habit=self.get_object())
+        context['days'] = Daily.objects.filter(habit=self.get_object(), is_active=True)
         return context
 
 
