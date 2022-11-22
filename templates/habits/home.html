@@ -20,20 +20,18 @@
     <ul class="list-group">
         {% for habit, daily in habits %}
             <li class="list-group-item">
-                <p>
+                <h4>
                 <a href="{% url 'habits:calendar' habit.pk %}">{{habit.name}}</a>
-                <a href="{% url 'habits:update' habit.pk %}" class="link-success">Editar</a>
-                <a href="{% url 'habits:delete' habit.pk %}" class="link-danger">Eliminar</a>
-
-
+                </h4>
+                <p>
+                <button type="button" class="btn btn-primary"><a href="{% url 'habits:update' habit.pk %}" class="link-success">Editar</a></button>
+                <button type="button" class="btn btn-danger"><a href="{% url 'habits:delete' habit.pk %}" class="link-danger">Eliminar</a></button>
+                </p>
                 <form name="formCheckbox" action="" method="POST" id="formCheckbox{{forloop.counter}}">
                     {% csrf_token %}
                     <input type="hidden" name="daily" value="{{habit.pk}}"/>
                     <input type="checkbox" class="form-check"  id="checkBox" {% if daily%}checked{% endif %} onchange="document.getElementById('formCheckbox{{forloop.counter}}').submit()">
                 </form>
-
-
-                </p>
             </li>
         {% empty %}
             <li class="list-group-item">
@@ -43,7 +41,31 @@
         
     </ul>
 </div>
-
+<style type="text/css">
+    .list-group-item{
+        padding: 1rem 3rem;
+        border: solid 2px #1d3557;
+        margin: 0.1rem 0rem;
+    }
+    h4 a {
+        color: #1d3557;
+    }
+    h4 a:hover {
+        color: #457b9d;
+    }
+    a {
+        color: white;
+    }
+    a:hover {
+        color: #c7cee7
+    }
+    .list-group-item form {
+        float: right;
+        margin-right: 5%;
+        margin-top: -5%;
+    }
+    
+</style>
 
 {% endblock body %}
 
