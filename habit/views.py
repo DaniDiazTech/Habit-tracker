@@ -34,8 +34,10 @@ class HomeView(LoginRequiredMixin, View):
 
     # Create a daily with the selected habit
     # by checking the box
-    def post(self):
-        pass
+    def post(self,  *args, **kwargs):
+        habit= self.request.POST.getlist("daily")
+        Daily.objects
+        
 
 
 #  Calendar View for specific habit
