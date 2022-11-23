@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'habits:home' %}">Controller</a>
+    <a class="navbar-brand" href="{% url 'habits:home' %}">Home</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -28,8 +28,19 @@
     {% comment %} Sign in {% endcomment %}
     
     {% if user.is_authenticated %}
-      <p class="text-white">Hola {{user.username}}</p>
-      <a class="navbar-brand" href="{%url 'accounts:logout' %}">Salir</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" 
+        type="button" id="dropdownMenuButton" 
+        data-toggle="dropdown" 
+        aria-haspopup="true" 
+        aria-expanded="false">
+
+          Hola {{user.username}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width: 4px">
+          <a class="dropdown-item" href="{%url 'accounts:logout' %}" >Salir</a>
+        </div>
+      </div>
 
     {% else %}
     <a class="btn btn-danger" href="{% url 'accounts:login' %}">Entra</a>

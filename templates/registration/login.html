@@ -10,15 +10,15 @@
 {% block body %}
 <div class="center text-center my-4">
     <h1> Bienvenido a Habit tracker! Registra de la mejor manera tus hábitos.</h1>
-    <h3>Ingresa con tu usuario y contraseña</h3>
-    <form action="#" method="POST">
+    <h3 style="text-align: center;">Ingresa con tu usuario y contraseña</h3>
+    <form action="#" method="POST" style="align-items: center;">
         {% csrf_token %}
         {% if form.errors %}
         <p>Por favor, intenta de nuevo</p>
         {% endif %}
         {{form.as_p}}
         <div class="my-3">
-            <button class="btn btn-danger" type="submit">Ingresar</button>
+            <button class="btn" type="submit" style="background-color: #457B9D; color: white;">Ingresar</button>
         </div>
     </form>
     <div class="text-center my-3">

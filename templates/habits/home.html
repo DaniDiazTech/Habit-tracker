@@ -24,8 +24,8 @@
                 <a href="{% url 'habits:calendar' habit.pk %}">{{habit.name}}</a>
                 </h4>
                 <p>
-                <button type="button" class="btn btn-primary"><a href="{% url 'habits:update' habit.pk %}" class="link-success">Editar</a></button>
-                <button type="button" class="btn btn-danger"><a href="{% url 'habits:delete' habit.pk %}" class="link-danger">Eliminar</a></button>
+                <button type="button" class="btn btn-primary" style="background-color: #457B9D;"><a href="{% url 'habits:update' habit.pk %}" class="link-success">Editar</a></button>
+                <button type="button" class="btn" style=" border-radius: 5px; color: aliceblue; background-color: #E63946;"><a href="{% url 'habits:delete' habit.pk %}" class="link-danger" >Eliminar</a></button>
                 </p>
                 <form name="formCheckbox" action="" method="POST" id="formCheckbox{{forloop.counter}}">
                     {% csrf_token %}
@@ -35,7 +35,7 @@
             </li>
         {% empty %}
             <li class="list-group-item">
-                <p>Lo sentimos, no tienes habitos. <a href="{% url 'habits:create' %}" class="link">Crea uno!</a></p>
+                <p>Lo sentimos, no tienes habitos. <a href="{% url 'habits:create' %}" class="link" style="color: Blue;">Crea uno!</a></p>
             </li>   
         {% endfor %}
         
