@@ -11,7 +11,7 @@ class SignUpView(CreateView):
     """
     form_class = SignUpForm
     template_name = "registration/signup.html"
-    success_url = 'habit:home'
+    success_url = reverse_lazy('habits:home')
     # If the form is valid it directly login the user and redirect him to the blog.
 
     def form_valid(self, form):
