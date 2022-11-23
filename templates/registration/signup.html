@@ -16,8 +16,29 @@
             <button class="btn btn-danger" type="submit">Registrarse</button>
         </div>
     </form>
-    <div class="text-center center my-3">
         <p>Ya estas registrado? Solo <a href="{% url 'accounts:login' %}" class="link link-danger" >Ingresa</a></p>
-    </div>
+
 </div>
+<style type="text/css">
+    .container{
+        padding: 5rem 0rem;
+    }
+    .text-center.center{
+        border: solid;
+        border-radius: 10px;
+    }
+    .text-center.center h1{
+        padding: 1rem 1rem;
+    }
+    .text-center.center form{
+        padding: 2rem;
+    }
+    .text-center.center form p label{
+        font-weight: 500;
+    }
+    .text-center.center form p input{
+        border: solid 2px;
+        border-radius: 20px;
+    }
+</style>
 {% endblock body %}

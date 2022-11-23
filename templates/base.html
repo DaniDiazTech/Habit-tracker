@@ -17,7 +17,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.11.3/main.min.css,npm/fullcalendar@5.11.3/main.min.css"
     />
-    <title>{% block title %}{% endblock title %} - Controller</title>
+
+    <title>{% block title %}{% endblock title %} - Home</title>
   </head>
   <body>
     {% block navbar %}
@@ -51,5 +52,10 @@
     <script src="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.11.3,npm/fullcalendar@5.11.3/locales-all.min.js,npm/fullcalendar@5.11.3/locales-all.min.js,npm/fullcalendar@5.11.3/main.min.js"></script>
     {% block scripts %}
     {% endblock scripts %}
+    <style type="text/css">
+      body {
+        background: radial-gradient(circle, rgba(237,237,233,1) 10%, rgba(159,219,236,1) 100%);
+      }
+    </style>
   </body>
 </html>

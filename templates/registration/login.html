@@ -9,7 +9,8 @@
 
 {% block body %}
 <div class="center text-center my-4">
-    <h1>Ingresa con tu usuario y contraseña</h1>
+    <h1> Bienvenido a Habit tracker! Registra de la mejor manera tus hábitos.</h1>
+    <h3>Ingresa con tu usuario y contraseña</h3>
     <form action="#" method="POST">
         {% csrf_token %}
         {% if form.errors %}
@@ -24,4 +25,30 @@
         <p>No tienes una cuenta? <a href="{% url 'accounts:signup' %}" class="link link-danger" >Registrate</a></p>
     </div>
 </div>
+<style type="text/css">
+    .container{
+        padding-top: 5rem;
+    }
+    .center.text-center.my-4 {
+        border: solid;
+        border-radius: 10px;
+    }
+    .center.text-center.my-4 h1{
+        padding: 1rem 1rem;
+    }
+    center.text-center.my-4 h3{
+        color: #42379d;
+    }
+    center.text-center.my-4 form {
+        padding-top: 2rem;
+    }
+    form > p > label{
+        font-weight: 500;
+    }
+    form > p > input {
+        border: solid 2px;
+        border-radius: 5px;
+    }
+
+</style>
 {% endblock body %}
