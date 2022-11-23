@@ -13,7 +13,7 @@
         {% csrf_token %}
         {{form.as_p}}
         <div class="my-3">
-            <button class="btn btn-danger" type="submit">Registrarse</button>
+            <button class="btn" type="submit" style="background-color: #457B9D; color: white;">Registrarse</button>
         </div>
     </form>
         <p>Ya estas registrado? Solo <a href="{% url 'accounts:login' %}" class="link link-danger" >Ingresa</a></p>
